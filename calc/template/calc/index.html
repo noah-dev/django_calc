@@ -1,0 +1,9 @@
+{% if calc_log_list %}
+    <ul>
+    {% for log in calc_log_list %}
+        <li>{{ log.op }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No logs are available.</p>
+{% endif %}
