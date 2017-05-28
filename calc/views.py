@@ -9,8 +9,13 @@ from .models import calc_log
 
 def index(request):
     # 5 most recent logs
-    calc_log_list = calc_log.objects.order_by('-calc_time')
+    raw = calc_log.objects.order_by('-calc_time')
+    first = raw[0]
+    calc_log_list = []
+    for log in raw:
+        calc_log_list.append(log.__str__())
     context = {
+        'first': first,
         'calc_log_list': calc_log_list
     }
     return render(request, 'calc/index.html', context)
@@ -18,7 +23,19 @@ def index(request):
 
 def test_in(request):
     in_string = request.POST['in_string']
-    op_a = float(in_string)
-    new_rec = calc_log(op_a=op_a, op='*', op_b=0, res=0, calc_time=timezone.now())
+    op_a, op, op_b = in_string.split()
+    op_a = float(op_a)
+    op_b = float(op_b)
+
+    if op == "+":
+        res = op_a + op_b
+    elif op == "-":
+        res = op_a - op_b
+    elif op == "*":
+        res = op_a * op_b
+    elif op == "/":
+        res = op_a / op_b
+
+    new_rec = calc_log(op_a=op_a, op=op, op_b=op_b, res=res, calc_time=timezone.now())
     new_rec.save()
     return redirect('/calc/')

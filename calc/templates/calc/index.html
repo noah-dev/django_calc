@@ -1,19 +1,22 @@
+{% extends "calc/wrapper.html" %}
+{% block content %}
+
+<h1>Calculator</h1>
+<form action="/calc/submit/" method="post">
+{% csrf_token %}
+<input type="text" name="in_string"><br><br>
+<input type="submit" value="Submit" />
+</form>
+
+<h1>Last Result: {{first.res}}</h1>
 {% if calc_log_list %}
     <ul>
     {% for log in calc_log_list %}
-        <li>{{ log.op }}</a></li>
+        <li>{{ log}}</li>
     {% endfor %}
     </ul>
 {% else %}
     <p>No logs are available.</p>
 {% endif %}
 
-<h1>Test</h1>
-
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-
-<form action="/calc/submit/" method="post">
-{% csrf_token %}
-<input type="text" name="in_string"><br>
-<input type="submit" value="Submit" />
-</form>
+{% endblock %}
