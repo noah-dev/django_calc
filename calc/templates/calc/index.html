@@ -7,3 +7,13 @@
 {% else %}
     <p>No logs are available.</p>
 {% endif %}
+
+<h1>Test</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="/calc/submit/" method="post">
+{% csrf_token %}
+<input type="text" name="in_string"><br>
+<input type="submit" value="Submit" />
+</form>
