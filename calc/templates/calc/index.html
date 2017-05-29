@@ -1,22 +1,38 @@
-{% extends "calc/wrapper.html" %}
+{% extends "calc/base.html" %}
 {% block content %}
 
-<h1>Calculator</h1>
-<form action="/calc/submit/" method="post">
-{% csrf_token %}
-<input type="text" name="in_string"><br><br>
-<input type="submit" value="Submit" />
-</form>
+<div id="content">
+  <div class="container">
+    <div class="col-sm-12">
+      <h1>Calculator</h1>
+      <form action="/calc/boot_submit/" method="post" class="form-inline">
+        {% csrf_token %}
+        <div class="form-group">
+          <label class="sr-only">Operand A</label>
+          <input type="text" class="form-control form-control-lg" name = "op_a" placeholder = "First Number">
+        </div>
+        <div class="form-group">
+          <label class="sr-only">Operator</label>
+          <input type="text" class="form-control form-control-lg" name = "op" placeholder = "Operation">
+        </div>
+        <div class="form-group">
+          <label class="sr-only">Operand B</label>
+          <input type="text" class="form-control form-control-lg" name = "op_b" placeholder = "Second Number">
+        </div>
+        <button type = "submit" class="btn btn-success btn-lg">Calculate!</button>
+      </form>
+      <h1>Last Result: {{first.res}}</h1>
+      {% if calc_log_list %}
+          <ul>
+          {% for log in calc_log_list %}
+              <li>{{ log}}</li>
+          {% endfor %}
+          </ul>
+      {% else %}
+          <p>No logs are available.</p>
+      {% endif %}
 
-<h1>Last Result: {{first.res}}</h1>
-{% if calc_log_list %}
-    <ul>
-    {% for log in calc_log_list %}
-        <li>{{ log}}</li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No logs are available.</p>
-{% endif %}
-
+    </div>
+  </div>
+</div>
 {% endblock %}

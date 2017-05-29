@@ -21,9 +21,10 @@ def index(request):
     return render(request, 'calc/index.html', context)
 
 
-def test_in(request):
-    in_string = request.POST['in_string']
-    op_a, op, op_b = in_string.split()
+def boot_submit(request):
+    op_a = request.POST['op_a']
+    op = request.POST['op']
+    op_b = request.POST['op_b']
     op_a = float(op_a)
     op_b = float(op_b)
 
@@ -35,7 +36,8 @@ def test_in(request):
         res = op_a * op_b
     elif op == "/":
         res = op_a / op_b
-
+    elif op == "^":
+        res = op_a ** op_b
     new_rec = calc_log(op_a=op_a, op=op, op_b=op_b, res=res, calc_time=timezone.now())
     new_rec.save()
     return redirect('/calc/')
