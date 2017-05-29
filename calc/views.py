@@ -4,6 +4,8 @@ from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
 
+from django.contrib import messages
+
 from .models import calc_log
 
 
@@ -38,11 +40,8 @@ def boot_submit(request):
                                calc_time=timezone.now())
             new_rec.save()
         except:
-            context = {
-                'calc_log_list': calc_log.objects.order_by('-calc_time'),
-                'error_message': "Input Not Valid - Please Try Again",
-            }
-            return render(request, 'calc/index.html', context)
+            messages.warning(request, "Input Not Valid - Please Try Again")
+            HttpResponseRedirect(request.path)
 
     elif 'clear' in request.POST:
         new_rec = calc_log(op_a=0, op='c', op_b=0, res=0,

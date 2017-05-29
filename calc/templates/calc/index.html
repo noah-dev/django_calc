@@ -31,7 +31,14 @@
         </div>
       </form><br>
 
-      {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+      {% if messages %}
+      <div class="row">
+          {% for message in messages %}
+          <h1>{{ message }}</h1>
+          {% endfor %}
+      </div>
+      <br>
+      {% endif %}
 
       <div class="row">
       {% if calc_log_list.0.op != 'c' %}
@@ -86,4 +93,5 @@
     </div>
   </div>
 </div>
+
 {% endblock %}
