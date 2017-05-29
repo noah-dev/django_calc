@@ -4,6 +4,7 @@
 <div id="content">
   <div class="container">
     <div class="col-sm-12">
+
       <h1>Calculator</h1><br>
       <form action="/calc/boot_submit/" method="post" class="form-inline">
         {% csrf_token %}
@@ -23,29 +24,60 @@
           <label class="sr-only">Operand B</label>
           <input type="text" class="form-control form-control-lg" name = "op_b" placeholder = "Second Number">
         </div>
-        <button type = "submit" class="btn btn-success btn-lg" name = "submit">Calculate!</button>
-        <button type = "submit" class="btn btn-danger btn-lg" name = "clear">Clear!</button>
-      </form>
+        <div class="form-group">
+          <button type = "submit" class="btn btn-success btn-lg" name = "submit">Calculate!</button>
+          <button type = "submit" class="btn btn-danger btn-lg" name = "clear">Clear!</button>
+        </div>
+      </form><br>
 
-      <br>
+      {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
       {% if calc_log_list.0.op != 'c' %}
       <h1>Last Result: {{calc_log_list.0.res}}</h1>
       {% else %}
       <h1>Cleared!</h1>
       {% endif %}
 
-      <hr class="my-4">
-      <h1>Previous Calculations</h1>
-      {% if calc_log_list %}
-          <ul>
-          {% for log in calc_log_list %}
-              <li>{{log}}</li>
-          {% endfor %}
-          </ul>
-      {% else %}
-          <p>No logs are available.</p>
-      {% endif %}
+      <br>
 
+      <div id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="card">
+          <div class="card-header" role="tab" id="headingOne">
+            <h5 class="mb-0">
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Previous Calculations
+              </a>
+            </h5>
+          </div>
+          <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+            <div class="card-block set_scroll">
+              <table class="table">
+                <thead>
+                    <th>Op. A</th>
+                    <th>Op. </th>
+                    <th>Op. B</th>
+                    <th></th>
+                    <th>Result</th>
+                    <th>Time</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for log in calc_log_list %}
+                  <tr>
+                      <td>{{log.op_a}}</td>
+                      <td>{{log.op}}</td>
+                      <td>{{log.op_b}}</td>
+                      <td>=</td>
+                      <td>{{log.res}}</td>
+                      <td>{{log.calc_time}}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
