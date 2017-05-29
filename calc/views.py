@@ -40,4 +40,5 @@ def boot_submit(request):
         res = op_a ** op_b
     new_rec = calc_log(op_a=op_a, op=op, op_b=op_b, res=res, calc_time=timezone.now())
     new_rec.save()
-    return redirect('/calc/')
+    # Used instead of redirect so that back button goes back to calc page
+    return HttpResponseRedirect(reverse('calc:index'))
