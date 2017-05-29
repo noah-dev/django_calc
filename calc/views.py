@@ -16,7 +16,6 @@ class IndexView(generic.ListView):
 
 
 def boot_submit(request):
-    print(request.POST)
     if 'submit' in request.POST:
         try:
             op_a = request.POST['op_a']

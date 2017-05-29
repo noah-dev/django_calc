@@ -4,11 +4,10 @@
 <div id="content">
   <div class="container">
     <div class="col-sm-12">
-
-      <h1>Calculator</h1><br>
-      <form action="/calc/boot_submit/" method="post" class="form-inline">
+      <div class="row"> <h1>Calculator</h1> </div><br>
+      <form action="/calc/boot_submit/" method="post" class = "row">
         {% csrf_token %}
-        <div class="form-group">
+        <div class="col-md-3 form-group">
           <label class="sr-only">Operand A</label>
           {% if calc_log_list.0.op != 'c' %}
             <input type="text" class="form-control form-control-lg" name = "op_a" value = "{{calc_log_list.0.res}}" placeholder = "First Number">
@@ -16,64 +15,70 @@
             <input type="text" class="form-control form-control-lg" name = "op_a" placeholder = "First Number">
           {% endif %}
         </div>
-        <div class="form-group">
+        <div class="col-md-2 form-group">
           <label class="sr-only">Operator</label>
           <input type="text" class="form-control form-control-lg" name = "op" placeholder = "Operation">
         </div>
-        <div class="form-group">
+        <div class="col-md-3 form-group">
           <label class="sr-only">Operand B</label>
           <input type="text" class="form-control form-control-lg" name = "op_b" placeholder = "Second Number">
         </div>
-        <div class="form-group">
+        <div class="col-md-2 form-group">
           <button type = "submit" class="btn btn-success btn-lg" name = "submit">Calculate!</button>
+        </div>
+        <div class="col-md-2 form-group">
           <button type = "submit" class="btn btn-danger btn-lg" name = "clear">Clear!</button>
         </div>
       </form><br>
 
       {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
+      <div class="row">
       {% if calc_log_list.0.op != 'c' %}
       <h1>Last Result: {{calc_log_list.0.res}}</h1>
       {% else %}
       <h1>Cleared!</h1>
       {% endif %}
+      </div>
 
       <br>
 
-      <div id="accordion" role="tablist" aria-multiselectable="true">
-        <div class="card">
-          <div class="card-header" role="tab" id="headingOne">
-            <h5 class="mb-0">
-              <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                Previous Calculations
-              </a>
-            </h5>
-          </div>
-          <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
-            <div class="card-block set_scroll">
-              <table class="table">
-                <thead>
-                    <th>Op. A</th>
-                    <th>Op. </th>
-                    <th>Op. B</th>
-                    <th></th>
-                    <th>Result</th>
-                    <th>Time</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {% for log in calc_log_list %}
-                  <tr>
-                      <td>{{log.op_a}}</td>
-                      <td>{{log.op}}</td>
-                      <td>{{log.op_b}}</td>
-                      <td>=</td>
-                      <td>{{log.res}}</td>
-                      <td>{{log.calc_time}}</td>
-                  </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
+      <div class="row">
+        <div id="accordion" role="tablist" aria-multiselectable="true" class = "col-md-12">
+          <div class="card">
+            <div class="card-header" role="tab" id="headingOne">
+              <h5 class="mb-0">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  Previous Calculations
+                </a>
+              </h5>
+            </div>
+            <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+              <div class="card-block set_scroll">
+                <table class="table">
+                  <thead>
+                      <th>Op. A</th>
+                      <th>Op. </th>
+                      <th>Op. B</th>
+                      <th></th>
+                      <th>Result</th>
+                      <th>Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for log in calc_log_list %}
+                    <tr>
+                        <td>{{log.op_a}}</td>
+                        <td>{{log.op}}</td>
+                        <td>{{log.op_b}}</td>
+                        <td>=</td>
+                        <td>{{log.res}}</td>
+                        <td>{{log.calc_time}}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
