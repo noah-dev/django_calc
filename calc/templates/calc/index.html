@@ -4,12 +4,16 @@
 <div id="content">
   <div class="container">
     <div class="col-sm-12">
-      <h1>Calculator</h1>
+      <h1>Calculator</h1><br>
       <form action="/calc/boot_submit/" method="post" class="form-inline">
         {% csrf_token %}
         <div class="form-group">
           <label class="sr-only">Operand A</label>
-          <input type="text" class="form-control form-control-lg" name = "op_a" placeholder = "First Number">
+          {% if calc_log_list.0.op != 'c' %}
+            <input type="text" class="form-control form-control-lg" name = "op_a" value = "{{calc_log_list.0.res}}" placeholder = "First Number">
+          {% else %}
+            <input type="text" class="form-control form-control-lg" name = "op_a" placeholder = "First Number">
+          {% endif %}
         </div>
         <div class="form-group">
           <label class="sr-only">Operator</label>
@@ -19,13 +23,23 @@
           <label class="sr-only">Operand B</label>
           <input type="text" class="form-control form-control-lg" name = "op_b" placeholder = "Second Number">
         </div>
-        <button type = "submit" class="btn btn-success btn-lg">Calculate!</button>
+        <button type = "submit" class="btn btn-success btn-lg" name = "submit">Calculate!</button>
+        <button type = "submit" class="btn btn-danger btn-lg" name = "clear">Clear!</button>
       </form>
-      <h1>Last Result: {{first.res}}</h1>
+
+      <br>
+      {% if calc_log_list.0.op != 'c' %}
+      <h1>Last Result: {{calc_log_list.0.res}}</h1>
+      {% else %}
+      <h1>Cleared!</h1>
+      {% endif %}
+
+      <hr class="my-4">
+      <h1>Previous Calculations</h1>
       {% if calc_log_list %}
           <ul>
           {% for log in calc_log_list %}
-              <li>{{ log}}</li>
+              <li>{{log}}</li>
           {% endfor %}
           </ul>
       {% else %}

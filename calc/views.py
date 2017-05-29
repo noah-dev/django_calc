@@ -21,24 +21,38 @@ def index(request):
     return render(request, 'calc/index.html', context)
 
 
-def boot_submit(request):
-    op_a = request.POST['op_a']
-    op = request.POST['op']
-    op_b = request.POST['op_b']
-    op_a = float(op_a)
-    op_b = float(op_b)
+class IndexView(generic.ListView):
+    template_name = 'calc/index.html'
+    context_object_name = 'calc_log_list'
 
-    if op == "+":
-        res = op_a + op_b
-    elif op == "-":
-        res = op_a - op_b
-    elif op == "*":
-        res = op_a * op_b
-    elif op == "/":
-        res = op_a / op_b
-    elif op == "^":
-        res = op_a ** op_b
-    new_rec = calc_log(op_a=op_a, op=op, op_b=op_b, res=res, calc_time=timezone.now())
-    new_rec.save()
-    # Used instead of redirect so that back button goes back to calc page
-    return HttpResponseRedirect(reverse('calc:index'))
+    def get_queryset(self):
+        return calc_log.objects.order_by('-calc_time')
+
+
+def boot_submit(request):
+    print(request.POST)
+    if 'submit' in request.POST:
+        op_a = request.POST['op_a']
+        op = request.POST['op']
+        op_b = request.POST['op_b']
+        op_a = float(op_a)
+        op_b = float(op_b)
+
+        if op == "+":
+            res = op_a + op_b
+        elif op == "-":
+            res = op_a - op_b
+        elif op == "*":
+            res = op_a * op_b
+        elif op == "/":
+            res = op_a / op_b
+        elif op == "^":
+            res = op_a ** op_b
+        new_rec = calc_log(op_a=op_a, op=op, op_b=op_b, res=res, calc_time=timezone.now())
+        new_rec.save()
+        # Used instead of redirect so that back button goes back to calc page
+    elif 'clear' in request.POST:
+        new_rec = calc_log(op_a=0, op='c', op_b=0, res=0, calc_time=timezone.now())
+        new_rec.save()
+
+    return HttpResponseRedirect(reverse('calc:generic_index'))
