@@ -3,4 +3,4 @@ from django.http import HttpResponse
 
 
 def home(request):
-    return HttpResponse("You're looking at question")
+    return HttpResponse("Welcome to the homepage (WIP)")
