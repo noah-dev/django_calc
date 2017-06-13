@@ -1,7 +1,9 @@
 # This is a basic django app I built
 It's a super simple calculator app that does basic operations and keeps a history of previous calculations in a SQLite database. 
+
 I run it locally, by first calling `python manage.py runserver` and then navigating to `localhost:8000\calc` 
-The front-end is built using the Bootstrap Framework
+
+The front-end is built using the Bootstrap Framework.
 
 ![](calc_demo.gif)
 
