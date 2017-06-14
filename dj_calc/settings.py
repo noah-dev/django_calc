@@ -27,10 +27,7 @@ STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn")
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '^6m8-5919s@&**e92=05&)1zz$@hp+g-#(h8qiza#_7x@#!$s9'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['frozen-eyrie-99770.herokuapp.com', ]
 
 
 # Application definition
