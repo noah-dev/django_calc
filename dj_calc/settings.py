@@ -27,7 +27,8 @@ STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn")
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '^6m8-5919s@&**e92=05&)1zz$@hp+g-#(h8qiza#_7x@#!$s9'
 
-ALLOWED_HOSTS = ['dj-calc.herokuapp.com', ]
+ALLOWED_HOSTS = ['dj-calc.herokuapp.com',
+                 'localhost', ]
 
 
 # Application definition
