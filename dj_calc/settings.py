@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
-
+import secret_settings
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -24,8 +24,8 @@ STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn")
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '^6m8-5919s@&**e92=05&)1zz$@hp+g-#(h8qiza#_7x@#!$s9'
+# Key is kept in secret_settings, which should be ignored by git
+SECRET_KEY = secret_settings.secret_key()
 
 ALLOWED_HOSTS = ['dj-calc.herokuapp.com',
                  'localhost', ]
