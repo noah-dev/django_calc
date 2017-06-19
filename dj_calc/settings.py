@@ -33,7 +33,7 @@ STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn")
 # Key is kept in secret_settings, which should be ignored by git
 SECRET_KEY = secret_key()
 
-ALLOWED_HOSTS = ['test-dj-calc.herokuapp.com',
+ALLOWED_HOSTS = ['dj-calc.herokuapp.com',
                  'localhost', ]
 
 
