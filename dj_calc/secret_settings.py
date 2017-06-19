@@ -1,2 +1,2 @@
 def secret_key():
-    return 'p<NOz[j`"AZ>?=?Msp"7hKn2_&w`i}1a)g4xXdPMazh%:LHT:'
+    return 'GFqQ8-u%o,lAPQ5~~zHtq"Bf[c7]M`9]-~rf0-,L>EKXgG)7n'
