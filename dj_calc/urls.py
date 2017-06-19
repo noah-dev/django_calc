@@ -21,4 +21,5 @@ from . import views
 urlpatterns = [
     url(r'^$', views.home),
     url(r'^calc/', include('calc.urls')),
+    url(r'^admin/', admin.site.urls),
 ]
