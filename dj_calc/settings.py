@@ -14,7 +14,7 @@ import os
 import dj_database_url
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
 
 from .secret_settings import secret_key
@@ -33,7 +33,7 @@ STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn")
 # Key is kept in secret_settings, which should be ignored by git
 SECRET_KEY = secret_key()
 
-ALLOWED_HOSTS = ['dj-calc.herokuapp.com',
+ALLOWED_HOSTS = ['test-dj-calc.herokuapp.com',
                  'localhost', ]
 
 
