@@ -20,6 +20,5 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.home),
-    url(r'^admin/', admin.site.urls),
     url(r'^calc/', include('calc.urls')),
 ]
